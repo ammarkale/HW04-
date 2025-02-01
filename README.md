@@ -3,7 +3,7 @@
 
 
 
-Purpose
+##Purpose
 Regex was applied to clean and standardize multiple columns of the CSV dataset. The main use cases for Regex in this project were:
 
 Address Standardization: Cleaning postal codes and addresses to ensure they follow a consistent format.
