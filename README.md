@@ -11,8 +11,15 @@ This project focuses on cleaning a CSV file containing building energy benchmark
 Regular Expressions (Regex) were used to extract and clean specific data points to ensure that values are ready for analysis. This process included:
 
 **Extracting numeric values from text-based columns like Property GFA (m²), Energy Use (GJ), and Emissions.**
+
+
+
 **Standardizing postal codes to ensure they follow the correct Canadian format (A1A 1A1).**
+
+
 **Cleaning and extracting meaningful text from the Property Name and Address fields.**
+
+
 **Converting data types to ensure that numeric fields are properly formatted for analysis.**
 
 Regex Tasks
