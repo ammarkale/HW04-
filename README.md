@@ -3,7 +3,8 @@
 
 
 
-##Purpose
+<span style="font-size:20px"><strong>Purpose</strong></span>
+
 
 
 Regex was applied to clean and standardize multiple columns of the CSV dataset. 
