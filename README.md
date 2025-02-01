@@ -1,9 +1,9 @@
-**Regex Usage for Data Extraction and Cleaning**
+# **Regex Usage for Data Extraction and Cleaning**
 
 
 
 
-<span style="font-size:16px"><strong>Purpose</strong></span>
+**Purpose**
 
 
 
