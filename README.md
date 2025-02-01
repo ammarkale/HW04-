@@ -10,19 +10,10 @@ This project focuses on cleaning a CSV file containing building energy benchmark
 
 Regular Expressions (Regex) were used to extract and clean specific data points to ensure that values are ready for analysis. This process included:
 
-**Extracting numeric values from text-based columns.**
-**Standardizing postal codes to the Canadian format (A1A 1A1).**
-**Cleaning and extracting meaningful text from property names and addresses.**
-**Ensuring extracted values are properly converted to numerical types for analysis.**
-
-
-
-The following tasks were achieved using Regex:
-
-Extracting numeric values from text-based columns like Property GFA (m²), Energy Use (GJ), and Emissions.
-Standardizing postal codes to ensure they follow the correct Canadian format (A1A 1A1).
-Cleaning and extracting meaningful text from the Property Name and Address fields.
-Converting data types to ensure that numeric fields are properly formatted for analysis.
+**Extracting numeric values from text-based columns like Property GFA (m²), Energy Use (GJ), and Emissions.**
+**Standardizing postal codes to ensure they follow the correct Canadian format (A1A 1A1).**
+**Cleaning and extracting meaningful text from the Property Name and Address fields.**
+**Converting data types to ensure that numeric fields are properly formatted for analysis.**
 
 Regex Tasks
 1. Extract Numeric Values from Text-Based Columns
@@ -30,9 +21,7 @@ Some fields, such as Property GFA (m²), Energy Use (GJ), and Emissions, sometim
 
 Regex Pattern:
 
-python
-Copy
-# Extract only the numeric values (integers or floats)
+## Extract only the numeric values (integers or floats)
 numeric_pattern = r"(\d+(\.\d+)?)"
 Example usage:
 
@@ -45,7 +34,7 @@ def extract_numeric(value):
         return float(match.group(1))
     return None
 
-# Applying this to columns like Energy Use and Property GFA
+## Applying this to columns like Energy Use and Property GFA
 df['Property GFA'] = df['Property GFA'].apply(extract_numeric)
 df['Energy Use'] = df['Energy Use'].apply(extract_numeric)
 This ensures that values such as 1838 m² are converted to 1838.0 for analysis.
