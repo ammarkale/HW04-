@@ -1,4 +1,4 @@
-**Regex Usage for Data Extraction and Cleaning**
+#Regex Usage for Data Extraction and Cleaning#
 Purpose
 Regex was applied to clean and standardize multiple columns of the CSV dataset. The main use cases for Regex in this project were:
 
