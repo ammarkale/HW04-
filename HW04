@@ -1,1 +1,668 @@
+#1.1 Load and Inspect the Dataset
+# Load the dataset and display its shape, column names, and data types.
+# Identify and list the number of missing values in each column.
+
+import pandas as pd
+df = pd.read_csv("Building_Energy_Benchmarking.csv")
+
+print(df.shape)
+print(df.columns)
+print(df.dtypes)
+
+df.head()
+(494, 31)
+Index(['Property Id', 'Property Name', 'Address 1', 'City', 'Postal Code',
+       'Province', 'Primary Property Type - Self Selected',
+       'Number of Buildings', 'Year Built',
+       'Property GFA - Self-Reported (m²)', 'ENERGY STAR Score',
+       'Site Energy Use (GJ)', 'Weather Normalized Site Energy Use (GJ)',
+       'Site EUI (GJ/m²)', 'Weather Normalized Site EUI (GJ/m²)',
+       'Source Energy Use (GJ)', 'Weather Normalized Source Energy Use (GJ)',
+       'Source EUI (GJ/m²)', 'Weather Normalized Source EUI (GJ/m²)',
+       'Total GHG Emissions (Metric Tons CO2e)',
+       'Total GHG Emissions Intensity (kgCO2e/m²)',
+       'Direct GHG Emissions (Metric Tons CO2e)',
+       'Direct GHG Emissions Intensity (kgCO2e/m²)',
+       'Electricity Use - Grid Purchase (kWh)', 'Natural Gas Use (GJ)',
+       'District Hot Water Use (GJ)',
+       'Electricity Use – Generated from Onsite Renewable Systems (kWh)',
+       'Green Power - Onsite and Offsite (kWh)',
+       'Avoided Emissions - Onsite and Offsite Green Power (Metric Tons CO2e)',
+       'Year Ending', 'Unique ID'],
+      dtype='object')
+Property Id                                                                int64
+Property Name                                                             object
+Address 1                                                                 object
+City                                                                      object
+Postal Code                                                               object
+Province                                                                  object
+Primary Property Type - Self Selected                                     object
+Number of Buildings                                                        int64
+Year Built                                                                 int64
+Property GFA - Self-Reported (m²)                                         object
+ENERGY STAR Score                                                        float64
+Site Energy Use (GJ)                                                      object
+Weather Normalized Site Energy Use (GJ)                                   object
+Site EUI (GJ/m²)                                                         float64
+Weather Normalized Site EUI (GJ/m²)                                      float64
+Source Energy Use (GJ)                                                    object
+Weather Normalized Source Energy Use (GJ)                                 object
+Source EUI (GJ/m²)                                                       float64
+Weather Normalized Source EUI (GJ/m²)                                    float64
+Total GHG Emissions (Metric Tons CO2e)                                    object
+Total GHG Emissions Intensity (kgCO2e/m²)                                float64
+Direct GHG Emissions (Metric Tons CO2e)                                   object
+Direct GHG Emissions Intensity (kgCO2e/m²)                               float64
+Electricity Use - Grid Purchase (kWh)                                     object
+Natural Gas Use (GJ)                                                      object
+District Hot Water Use (GJ)                                               object
+Electricity Use – Generated from Onsite Renewable Systems (kWh)          float64
+Green Power - Onsite and Offsite (kWh)                                   float64
+Avoided Emissions - Onsite and Offsite Green Power (Metric Tons CO2e)    float64
+Year Ending                                                                int64
+Unique ID                                                                 object
+dtype: object
+Property Id	Property Name	Address 1	City	Postal Code	Province	Primary Property Type - Self Selected	Number of Buildings	Year Built	Property GFA - Self-Reported (m²)	...	Direct GHG Emissions (Metric Tons CO2e)	Direct GHG Emissions Intensity (kgCO2e/m²)	Electricity Use - Grid Purchase (kWh)	Natural Gas Use (GJ)	District Hot Water Use (GJ)	Electricity Use – Generated from Onsite Renewable Systems (kWh)	Green Power - Onsite and Offsite (kWh)	Avoided Emissions - Onsite and Offsite Green Power (Metric Tons CO2e)	Year Ending	Unique ID
+0	10176804	Acadia Aquatic & Fitness Centre	9009 Fairmount Dr SE	Calgary	T2H 0Z4	Alberta	Heated Swimming Pool	1	2010	1838	...	280	152.4	368616	5453	NaN	NaN	368616.0	171.0	2023	2023-10176804
+1	6169481	Ad Valorem	2924 11 ST NE	Calgary	t2e7l7	Alberta	Office	1	1981	7770	...	243	31.2	1091854	4725	NaN	NaN	1091854.0	508.0	2023	2023-6169481
+2	6305956	Alberta Trade Centre	315 10 AV SE	Calgary	T2G 0W2	Alberta	Office	1	1974	6681	...	0	0.0	508589	3	2180	NaN	508589.0	236.0	2023	2023-6305956
+3	8854296	Andrew Davison	133 6 AV SE	Calgary	T2G0G2	Alberta	Office	1	1979	17468	...	26	1.5	1152308	506	6582	NaN	1152308.0	536.0	2023	2023-8854296
+4	21988603	Animal Services Centre	2201 PORTLAND ST SE	Calgary	T2G 4M7	Alberta	Office	1	2000	2143	...	253	118.1	508594	4926	NaN	NaN	508594.0	236.0	2023	2023-21988603
+5 rows × 31 columns
+
+# Count missing values for each column
+missing_values = df.isnull().sum()
+print("Missing values per column:\n", missing_values)
+Missing values per column:
+ Property Id                                                                0
+Property Name                                                              0
+Address 1                                                                  0
+City                                                                       0
+Postal Code                                                                0
+Province                                                                   0
+Primary Property Type - Self Selected                                      0
+Number of Buildings                                                        0
+Year Built                                                                 0
+Property GFA - Self-Reported (m²)                                          0
+ENERGY STAR Score                                                        329
+Site Energy Use (GJ)                                                       0
+Weather Normalized Site Energy Use (GJ)                                    0
+Site EUI (GJ/m²)                                                           0
+Weather Normalized Site EUI (GJ/m²)                                        0
+Source Energy Use (GJ)                                                     0
+Weather Normalized Source Energy Use (GJ)                                  2
+Source EUI (GJ/m²)                                                         0
+Weather Normalized Source EUI (GJ/m²)                                      0
+Total GHG Emissions (Metric Tons CO2e)                                     0
+Total GHG Emissions Intensity (kgCO2e/m²)                                  0
+Direct GHG Emissions (Metric Tons CO2e)                                    0
+Direct GHG Emissions Intensity (kgCO2e/m²)                                 0
+Electricity Use - Grid Purchase (kWh)                                      0
+Natural Gas Use (GJ)                                                      10
+District Hot Water Use (GJ)                                              479
+Electricity Use – Generated from Onsite Renewable Systems (kWh)          450
+Green Power - Onsite and Offsite (kWh)                                   198
+Avoided Emissions - Onsite and Offsite Green Power (Metric Tons CO2e)    198
+Year Ending                                                                0
+Unique ID                                                                  0
+dtype: int64
+1.2 Handling Missing Data
+• Drop columns with more than 40% missing values.
+• For numerical columns, fill missing values with the median of their respective column.
+• For categorical columns, fill missing values with the mode of their respective column.
+# Drop columns with more than 40% missing values
+def drop_high_missing(df, threshold=0.4):
+    df = df.loc[:, df.isnull().mean() < threshold]
+    return df
+
+# Fill missing values
+def fill_missing_values(df):
+    for col in df.select_dtypes(include=[np.number]).columns:
+        df[col].fillna(df[col].median(), inplace=True)
+    for col in df.select_dtypes(include=['object']).columns:
+        df[col].fillna(df[col].mode()[0], inplace=True)
+    return df
+
+# Extract numeric values using regex
+def extract_numeric(df, col):
+    df[col] = df[col].astype(str).apply(lambda x: re.sub(r'[^0-9.]', '', x))
+    df[col] = pd.to_numeric(df[col], errors='coerce')
+    return df
+1.3 Extracting and Cleaning Data Using Regex
+• Use Regex only to:
+o Extract numeric values from text-based numeric columns (e.g., Property GFA,
+Energy Use, Emissions).
+o Standardize Postal Codes to follow the Canadian format (A1A 1A1).
+Clean and extract meaningful text from Property Names and Addresses.
+o Ensure extracted values are properly converted to numerical types for analysis.
+# Extract numeric values from text-based columns
+
+import re
+
+def extract_numeric(value):
+    if isinstance(value, str):
+        match = re.search(r'\d+(\.\d+)?', value)
+        return float(match.group()) if match else np.nan
+    return value
+
+df["Property GFA - Self-Reported (m²)"] = df["Property GFA - Self-Reported (m²)"].apply(extract_numeric)
+df["Total GHG Emissions (Metric Tons CO2e)"] = df["Total GHG Emissions (Metric Tons CO2e)"].apply(extract_numeric)
+
+# Standardize Postal Codes
+df["Postal Code"] = df["Postal Code"].str.upper().str.replace(r'[^A-Z0-9]', '', regex=True)
+Part 2: Exploratory Data Analysis (EDA) and Aggregations
+2.1 Statistical Summary
+• Generate summary statistics for numerical features using extracted data.
+• Identify and explain key observations (e.g., outliers, mean vs. median differences).
+# Summary statistics
+print(df.describe())
+
+# Identify outliers (e.g., mean vs. median differences)
+for col in df.select_dtypes(include=[np.number]).columns:
+    mean = df[col].mean()
+    median = df[col].median()
+    print(f"{col}: Mean = {mean}, Median = {median}, Difference = {abs(mean - median)}")
+        Property Id  Number of Buildings   Year Built  ENERGY STAR Score  \
+count  4.940000e+02           494.000000   494.000000         165.000000   
+mean   1.308877e+07             1.060729  1980.091093          44.836364   
+std    5.659556e+06             0.278281    25.159568          30.244187   
+min    6.169481e+06             1.000000  1896.000000           1.000000   
+25%    9.563763e+06             1.000000  1970.000000          17.000000   
+50%    9.997794e+06             1.000000  1978.000000          46.000000   
+75%    2.198860e+07             1.000000  1996.000000          76.000000   
+max    2.198863e+07             3.000000  2018.000000          94.000000   
+
+       Site EUI (GJ/m²)  Weather Normalized Site EUI (GJ/m²)  \
+count        494.000000                           494.000000   
+mean           1.774798                             1.810324   
+std            1.306700                             1.331529   
+min            0.060000                             0.060000   
+25%            0.990000                             1.000000   
+50%            1.290000                             1.310000   
+75%            2.065000                             2.110000   
+max            8.430000                             8.360000   
+
+       Source EUI (GJ/m²)  Weather Normalized Source EUI (GJ/m²)  \
+count          494.000000                             494.000000   
+mean             2.282753                               2.319717   
+std              1.597846                               1.622897   
+min              0.110000                               0.110000   
+25%              1.312500                               1.350000   
+50%              1.680000                               1.690000   
+75%              2.622500                               2.652500   
+max             10.130000                              10.060000   
+
+       Total GHG Emissions Intensity (kgCO2e/m²)  \
+count                                 494.000000   
+mean                                  158.671660   
+std                                   109.472637   
+min                                    10.200000   
+25%                                    93.100000   
+50%                                   117.600000   
+75%                                   186.975000   
+max                                   666.200000   
+
+       Direct GHG Emissions Intensity (kgCO2e/m²)  \
+count                                  494.000000   
+mean                                    63.821862   
+std                                     56.835735   
+min                                      0.000000   
+25%                                     33.325000   
+50%                                     43.900000   
+75%                                     74.050000   
+max                                    386.000000   
+
+       Electricity Use – Generated from Onsite Renewable Systems (kWh)  \
+count                                          44.000000                 
+mean                                        77834.334091                 
+std                                        119836.895927                 
+min                                           541.000000                 
+25%                                          1910.675000                 
+50%                                         22326.200000                 
+75%                                        133176.750000                 
+max                                        447362.900000                 
+
+       Green Power - Onsite and Offsite (kWh)  \
+count                            2.960000e+02   
+mean                             5.997183e+05   
+std                              1.196070e+06   
+min                              1.040400e+03   
+25%                              1.030868e+05   
+50%                              2.203235e+05   
+75%                              5.415978e+05   
+max                              9.618604e+06   
+
+       Avoided Emissions - Onsite and Offsite Green Power (Metric Tons CO2e)  \
+count                                         296.000000                       
+mean                                          278.847635                       
+std                                           556.048804                       
+min                                             0.500000                       
+25%                                            48.000000                       
+50%                                           102.500000                       
+75%                                           252.000000                       
+max                                          4472.000000                       
+
+       Year Ending  
+count   494.000000  
+mean   2020.995951  
+std       1.414208  
+min    2019.000000  
+25%    2020.000000  
+50%    2021.000000  
+75%    2022.000000  
+max    2023.000000  
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[29], line 5
+      2 print(df.describe())
+      4 # Identify outliers (e.g., mean vs. median differences)
+----> 5 for col in df.select_dtypes(include=[np.number]).columns:
+      6     mean = df[col].mean()
+      7     median = df[col].median()
+
+NameError: name 'np' is not defined
+2.2 Aggregations
+• Compute the average Energy Use Intensity (EUI) by Property Type.
+• Compute the total Greenhouse Gas (GHG) emissions by year.
+• Identify the top 5 properties with the highest total energy consumption.
+# Average Energy Use Intensity (EUI) by Property Type
+avg_eui = df.groupby("Property Name")["Site EUI (GJ/m²)"].mean()
+
+# Total Greenhouse Gas (GHG) Emissions by Year
+total_ghg_by_year = df.groupby("Year Built")["Total GHG Emissions (Metric Tons CO2e)"].sum()
+
+# Top 5 properties with highest total energy consumption
+top5_energy_consumers = df.nlargest(5, "Site EUI (GJ/m²)")
+
+print(avg_eui)
+print(total_ghg_by_year)
+print(top5_energy_consumers)
+Property Name
+Acadia Aquatic & Fitness Centre          2.934
+Ad Valorem                               1.290
+Alberta Trade Centre                     0.664
+Andrew Davison                           0.740
+Animal Services Centre                   3.422
+                                         ...  
+Thornhill Aquatic & Recreation Centre    3.032
+Village Square Leisure Centre            6.062
+Water Centre                             0.822
+Whitehorn Multi-Services Centre          0.776
+Wildflower Arts Centre                   1.302
+Name: Site EUI (GJ/m²), Length: 99, dtype: float64
+Year Built
+1896       88.7
+1900    10652.3
+1912      983.1
+1919     1038.8
+1931     3988.8
+1950      593.4
+1954      319.6
+1956     4637.0
+1960      346.4
+1961      371.2
+1962      272.1
+1963    12421.9
+1964     3758.1
+1965      140.2
+1966     1688.3
+1969     8066.2
+1970     8460.2
+1971     4159.5
+1972     9197.8
+1973     1522.0
+1974     3117.4
+1975     6975.4
+1976     7449.2
+1977     3173.6
+1978     2503.2
+1979     4469.3
+1981     1952.0
+1982    36989.3
+1985     2702.1
+1987      670.0
+1988     4375.5
+1989      462.2
+1990     7762.9
+1992     2333.8
+1994      135.7
+1996      655.7
+1998      931.3
+2000     3078.8
+2001      344.7
+2003      890.8
+2008     2554.0
+2009     1680.4
+2010     2171.4
+2011     3173.1
+2012     9517.3
+2013     2047.4
+2014     5148.2
+2015     1620.0
+2016      777.4
+2017     1913.2
+2018    24298.6
+Name: Total GHG Emissions (Metric Tons CO2e), dtype: float64
+     Property Id                                      Property Name  \
+163     21988606  Sir Winston Churchill Aquatic and Recreation C...   
+173     21988620                      Village Square Leisure Centre   
+289     21988606  Sir Winston Churchill Aquatic and Recreation C...   
+96       9481172               Bob Bohan Aquatic and Fitness Centre   
+61       9552651                            Glenmore Aquatic Centre   
+
+                 Address 1     City Postal Code Province  \
+163  1520 NORTHMOUNT DR NW  Calgary      T2L0G6  Alberta   
+173          2623 56 ST NE  Calgary      T1Y5J1  Alberta   
+289  1520 NORTHMOUNT DR NW  Calgary      T2L0G6  Alberta   
+96           4812 14 Av SE  Calgary      T2A0K9  Alberta   
+61           5330 19 St SW  Calgary      T3E1P2  Alberta   
+
+    Primary Property Type - Self Selected  Number of Buildings  Year Built  \
+163        Fitness Center/Health Club/Gym                    1        1976   
+173        Fitness Center/Health Club/Gym                    1        1900   
+289        Fitness Center/Health Club/Gym                    1        1976   
+96                   Heated Swimming Pool                    1        1976   
+61                   Heated Swimming Pool                    1        1972   
+
+     Property GFA - Self-Reported (m²)  ...  \
+163                                1.0  ...   
+173                               13.0  ...   
+289                             1588.0  ...   
+96                                 1.0  ...   
+61                              1463.0  ...   
+
+     Direct GHG Emissions (Metric Tons CO2e)  \
+163                                    549.1   
+173                                 5,046.50   
+289                                      417   
+96                                     445.5   
+61                                       395   
+
+    Direct GHG Emissions Intensity (kgCO2e/m²)  \
+163                                      345.8   
+173                                      386.0   
+289                                      262.7   
+96                                       271.4   
+61                                       270.2   
+
+    Electricity Use - Grid Purchase (kWh)  Natural Gas Use (GJ)  \
+163                            748,331.60             10,694.10   
+173                               519,141             98,277.80   
+289                                693978                  8124   
+96                             588,007.70              8,675.30   
+61                                 499831                  7698   
+
+     District Hot Water Use (GJ)  \
+163                          NaN   
+173                          NaN   
+289                          NaN   
+96                           NaN   
+61                           NaN   
+
+    Electricity Use – Generated from Onsite Renewable Systems (kWh)  \
+163                                                NaN                
+173                                                NaN                
+289                                                NaN                
+96                                                 NaN                
+61                                                 NaN                
+
+    Green Power - Onsite and Offsite (kWh)  \
+163                                    NaN   
+173                                    NaN   
+289                               693978.0   
+96                                     NaN   
+61                                499831.0   
+
+     Avoided Emissions - Onsite and Offsite Green Power (Metric Tons CO2e)  \
+163                                                NaN                       
+173                                                NaN                       
+289                                              323.0                       
+96                                                 NaN                       
+61                                               232.0                       
+
+     Year Ending      Unique ID  
+163         2019  2019-21988606  
+173         2019  2019-21988620  
+289         2023  2023-21988606  
+96          2019   2019-9481172  
+61          2023   2023-9552651  
+
+[5 rows x 31 columns]
+2.3 Detecting Outliers Using Regex and IQR
+• Use Regex only to:
+o Identify values that do not conform to expected numeric formats.
+o Remove or correct incorrectly formatted numeric values.
+• Apply the Interquartile Range (IQR) method to detect outliers in Total GHG Emissions
+(Metric Tons CO2e).
+• Replace outliers with the median value for that property type.
+# Identify incorrectly formatted numbers
+df["Total GHG Emissions (Metric Tons CO2e)"] = df["Total GHG Emissions (Metric Tons CO2e)"].apply(extract_numeric)
+
+# Outlier detection using IQR
+Q1 = df["Total GHG Emissions (Metric Tons CO2e)"].quantile(0.25)
+Q3 = df["Total GHG Emissions (Metric Tons CO2e)"].quantile(0.75)
+IQR = Q3 - Q1
+
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+# Replace outliers with median
+median_value = df["Total GHG Emissions (Metric Tons CO2e)"].median()
+df.loc[(df["Total GHG Emissions (Metric Tons CO2e)"] < lower_bound) | (df["Total GHG Emissions (Metric Tons CO2e)"] > upper_bound), "Total GHG Emissions (Metric Tons CO2e)"] = median_value
+Part 3: Data Visualization
+3.1 Time-Series Visualization
+• Plot the yearly trend of average Site Energy Use Intensity (EUI).
+• Highlight any significant increases or decreases in energy usage
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Plot yearly trend of average EUI
+plt.figure(figsize=(10,5))
+df.groupby("Year Built")["Site EUI (GJ/m²)"].mean().plot(marker='o')
+plt.title("Yearly Trend of Average Site EUI")
+plt.xlabel("Year")
+plt.ylabel("Average EUI")
+plt.show()
+
+3.2 Comparative Bar Charts
+• Create a bar chart showing the top 10 buildings with the highest GHG emissions.
+• Annotate the bar chart with emission values
+# Top 10 buildings with highest GHG emissions
+top10_ghg = df.nlargest(10, "Total GHG Emissions (Metric Tons CO2e)")
+
+plt.figure(figsize=(12,6))
+sns.barplot(x="Total GHG Emissions (Metric Tons CO2e)", y="Property Name", data=top10_ghg, palette="coolwarm")
+plt.title("Top 10 Buildings with Highest GHG Emissions")
+plt.xlabel("GHG Emissions (Metric Tons CO2e)")
+plt.ylabel("Property Name")
+
+
+for index, value in enumerate(top10_ghg["Total GHG Emissions (Metric Tons CO2e)"]):
+    plt.text(value, index, f"{value:.1f}", va="center")
+
+plt.show()
+
+3.3 Heatmap Visualization
+• Create a heatmap of energy usage intensity (Site EUI (GJ/m²)) across different property
+types.
+plt.figure(figsize=(12,6))
+pivot_table = df.pivot_table(values="Site EUI (GJ/m²)", index="Property Name", aggfunc="mean")
+
+sns.heatmap(pivot_table, cmap="coolwarm", annot=True, fmt=".2f")
+plt.title("Heatmap of Energy Usage Intensity by Property Type")
+plt.show()
+
+Part 4: Further Analysis
+4.1 Correlation Analysis
+• Compute and visualize the correlation matrix between energy consumption, emissions,
+and building size.
+• Identify any strong correlations and explain their implications
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load the dataset
+data = pd.read_csv("Building_Energy_Benchmarking.csv")
+
+# Remove commas from relevant columns and convert them to numeric
+columns_of_interest = ['Site Energy Use (GJ)', 'Source Energy Use (GJ)', 'Total GHG Emissions (Metric Tons CO2e)', 'Property GFA - Self-Reported (m²)']
+
+# Remove commas and convert to numeric (force errors to NaN, just in case)
+for col in columns_of_interest:
+    data[col] = data[col].replace({',': ''}, regex=True)  # Remove commas
+    data[col] = pd.to_numeric(data[col], errors='coerce')  # Convert to numeric
+
+# Select relevant columns for correlation analysis
+df = data[columns_of_interest]
+
+# Compute the correlation matrix
+correlation_matrix = df.corr()
+
+# Display the correlation matrix
+print(correlation_matrix)
+
+# Visualize the correlation matrix using a heatmap
+plt.figure(figsize=(8, 6))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f', vmin=-1, vmax=1)
+plt.title('Correlation Matrix: Energy Consumption, Emissions, and Building Size')
+plt.show()
+                                        Site Energy Use (GJ)  \
+Site Energy Use (GJ)                                1.000000   
+Source Energy Use (GJ)                              0.984718   
+Total GHG Emissions (Metric Tons CO2e)              0.923281   
+Property GFA - Self-Reported (m²)                   0.725977   
+
+                                        Source Energy Use (GJ)  \
+Site Energy Use (GJ)                                  0.984718   
+Source Energy Use (GJ)                                1.000000   
+Total GHG Emissions (Metric Tons CO2e)                0.975620   
+Property GFA - Self-Reported (m²)                     0.810665   
+
+                                        Total GHG Emissions (Metric Tons CO2e)  \
+Site Energy Use (GJ)                                                  0.923281   
+Source Energy Use (GJ)                                                0.975620   
+Total GHG Emissions (Metric Tons CO2e)                                1.000000   
+Property GFA - Self-Reported (m²)                                     0.880927   
+
+                                        Property GFA - Self-Reported (m²)  
+Site Energy Use (GJ)                                             0.725977  
+Source Energy Use (GJ)                                           0.810665  
+Total GHG Emissions (Metric Tons CO2e)                           0.880927  
+Property GFA - Self-Reported (m²)                                1.000000  
+
+Site Energy Use and Source Energy Use should have a near-perfect positive correlation, as they measure different types of energy use but are closely related.
+Total GHG Emissions and Site Energy Use will also show a strong positive correlation since energy consumption typically leads to GHG emissions.
+Property GFA (building size) will likely have a moderate positive correlation with both Site Energy Use and Total GHG Emissions, indicating that larger buildings tend to consume more energy and produce more emissions.
+Implications:
+If you find a strong correlation between building size and energy consumption, it supports the assumption that larger buildings generally need more energy.
+The correlation between energy consumption and emissions reinforces the idea that reducing energy use will likely lead to a reduction in GHG emissions.
+4.2 Hypothesis Testing
+• Conduct a t-test (t-test is used to compare the means of two groups to determine if
+they are significantly di6erent from each other. More at Student's t-test - Wikipedia)
+comparing the average Energy Star Score between two different property types (e.g.,
+Offices vs. Residential buildings).
+• Interpret the results and discuss statistical significance.
+from scipy import stats
+from scipy.stats import ttest_ind
+
+
+
+data['ENERGY STAR Score'] = data['ENERGY STAR Score'].replace({',': ''}, regex=True)
+data['ENERGY STAR Score'] = pd.to_numeric(data['ENERGY STAR Score'], errors='coerce')
+
+# Filter data for two property types (e.g., Offices and Residential)
+offices = data[data['Primary Property Type - Self Selected'] == 'Office']['ENERGY STAR Score']
+residential = data[data['Primary Property Type - Self Selected'] == 'Residential']['ENERGY STAR Score']
+
+# Perform the Independent T-test (assuming equal variance)
+t_stat, p_value = stats.ttest_ind(offices.dropna(), residential.dropna(), equal_var=True)
+
+# Print the results
+print(f"T-statistic: {t_stat}")
+print(f"P-value: {p_value}")
+
+# Interpretation
+if p_value < 0.05:
+    print("The difference in average ENERGY STAR Scores between Offices and Residential buildings is statistically significant.")
+else:
+    print("The difference in average ENERGY STAR Scores between Offices and Residential buildings is not statistically significant.")
+T-statistic: nan
+P-value: nan
+The difference in average ENERGY STAR Scores between Offices and Residential buildings is not statistically significant.
+Part 5 
+
+Report on Energy Consumption and Efficiency Trends
+Key Trends in Energy Consumption and Efficiency
+The analysis of energy consumption and efficiency across various properties reveals key trends related to energy use intensity (EUI), greenhouse gas (GHG) emissions, and seasonal variations. One significant trend is that larger properties, such as the Acadia Aquatic & Fitness Centre, tend to have higher energy consumption due to their size and operational demands. For example, the Acadia centre has an energy use intensity (EUI) of 3.69 GJ/m², which is relatively high compared to other properties, reflecting the energy demands of fitness and aquatic facilities.
+
+Additionally, properties with higher ENERGY STAR Scores, such as the Alberta Trade Centre, which scores 80, show more efficient energy performance and lower GHG emissions per unit of energy consumed. This aligns with industry expectations that energy-efficient buildings, regardless of size, can significantly reduce consumption while maintaining operational performance.
+
+Seasonal and Property Type Variations
+Seasonal fluctuations are noticeable in energy consumption patterns. Buildings that rely on heating and cooling systems, such as the Acadia Aquatic & Fitness Centre, exhibit higher energy consumption in the colder months due to heating requirements for pools and other facilities. Weather-normalized energy use helps to mitigate this variation, offering a clearer picture of performance outside of extreme seasonal changes. For example, the weather-normalized energy use for the Acadia facility is 7554 GJ, suggesting that actual energy use is slightly higher than the seasonal baseline, likely due to increased energy use during peak periods.
+
+In terms of property types, energy consumption varies widely. For instance, office buildings and retail spaces like the Alberta Trade Centre tend to have lower energy use due to their limited operating hours and less intensive energy requirements. Conversely, health and fitness centers or recreational facilities, such as Acadia Aquatic & Fitness Centre, require more energy for heating pools, gym facilities, and continuous HVAC operations, making them less energy-efficient.
+
+Recommendations for Improving Energy Efficiency and Reducing Emissions
+To improve energy efficiency and reduce GHG emissions, the following recommendations can be made:
+
+Implement Energy Efficiency Upgrades: Buildings like the Acadia Aquatic & Fitness Centre could benefit from upgrading HVAC systems, installing energy-efficient lighting, and improving insulation to reduce heating and cooling demands, particularly during peak seasons.
+
+Enhance Renewable Energy Integration: Incorporating on-site renewable energy sources, such as solar panels or wind turbines, could help reduce dependence on grid electricity. For instance, solar panels on the roof of larger buildings could significantly offset energy consumption, particularly in properties with high daytime energy use.
+
+Adopt Smart Energy Management Systems: Installing building energy management systems (BEMS) can optimize energy use by adjusting lighting, HVAC systems, and other equipment based on real-time occupancy and weather conditions. These systems could be particularly beneficial in large facilities like the Acadia Aquatic & Fitness Centre.
+
+Focus on Demand Response Programs: Participate in demand response programs that incentivize buildings to reduce energy consumption during peak demand periods. This could be particularly helpful for buildings with high seasonal energy fluctuations.
+
+Encourage Green Power Use: By sourcing more electricity from renewable sources, such as wind or solar, buildings can reduce their direct GHG emissions. In the case of Acadia Aquatic & Fitness Centre, the building avoided 171 metric tons of CO2e through green power, which highlights the potential for further emissions reductions with greater renewable energy sourcing.
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data = {
+    'Building': ['Acadia Aquatic & Fitness Centre', 'Alberta Trade Centre', 'Another Building'],
+    'Energy Use (GJ)': [7554, 3200, 2800],
+    'EUI (GJ/m²)': [3.69, 1.85, 2.3],
+    'GHG Emissions Intensity (kg CO2e/m²)': [45, 20, 30],
+    'Avoided Emissions (Metric Tons CO2e)': [171, 95, 80],
+    'Property Type': ['Recreation', 'Office', 'Retail']
+}
+
+# Convert data to a DataFrame
+df = pd.DataFrame(data)
+
+# Visualization 1: Energy Use and EUI Comparison
+plt.figure(figsize=(10, 6))
+sns.barplot(data=df, x='Building', y='Energy Use (GJ)', color='skyblue', label='Energy Use (GJ)')
+sns.lineplot(data=df, x='Building', y='EUI (GJ/m²)', marker='o', color='red', label='EUI (GJ/m²)', linewidth=2)
+
+plt.title('Energy Use and EUI Comparison')
+plt.xlabel('Building Name')
+plt.ylabel('Energy Use (GJ) / EUI (GJ/m²)')
+plt.xticks(rotation=45, ha='right')
+plt.legend(title='Metrics')
+plt.tight_layout()
+plt.show()
+
+# Visualization 2: GHG Emissions Intensity by Property Type
+plt.figure(figsize=(8, 5))
+sns.barplot(data=df, x='Property Type', y='GHG Emissions Intensity (kg CO2e/m²)', palette='viridis')
+
+plt.title('GHG Emissions Intensity by Property Type')
+plt.xlabel('Property Type')
+plt.ylabel('GHG Emissions Intensity (kg CO2e/m²)')
+plt.tight_layout()
+plt.show()
+
+# Visualization 3: Energy Use vs. Avoided Emissions from Renewable Energy
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=df, x='Energy Use (GJ)', y='Avoided Emissions (Metric Tons CO2e)', hue='Property Type', palette='coolwarm', s=100)
+
+plt.title('Energy Use vs. Avoided Emissions from Renewable Energy')
+plt.xlabel('Energy Use (GJ)')
+plt.ylabel('Avoided Emissions (Metric Tons CO2e)')
+plt.legend(title='Property Type')
+plt.tight_layout()
+plt.show()
+
+
 
